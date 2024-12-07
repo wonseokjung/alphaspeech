@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@tensorflow-models/speech-commands": "^0.5.4",
+    "react-speech-recognition": "^3.10.0",
+    "tone": "^14.7.77",
+    "howler": "^2.2.3",
+    "react-rewards": "^2.0.4"
+  }
+} 
