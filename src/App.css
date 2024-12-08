@@ -1,92 +1,130 @@
 :root {
-  --blackpink-pink: #F096AA;
-  --blackpink-black: #000000;
-  --blackpink-light-pink: #F8B5C1;
-  --blackpink-dark-pink: #E77D93;
+  /* 메인 컬러 팔레트 */
+  --color-primary: #F096AA;
+  --color-primary-dark: #E77D93;
+  --color-primary-light: #F8B5C1;
+  --color-accent: #FFB4B4;
+  
+  /* 배경색 */
+  --color-background: #000000;
+  --color-background-light: rgba(240, 150, 170, 0.1);
+  
+  /* 텍스트 색상 */
+  --color-text: var(--color-primary);
+  --color-text-light: var(--color-primary-light);
+  --color-text-dark: var(--color-primary-dark);
+  
+  /* 효과 */
+  --shadow-sm: 0 2px 4px rgba(240, 150, 170, 0.1);
+  --shadow-md: 0 4px 8px rgba(240, 150, 170, 0.2);
+  --shadow-lg: 0 8px 16px rgba(240, 150, 170, 0.3);
+  
+  /* 크기 */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  
+  /* 트랜지션 */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+/* 기본 스타일 리셋 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  background-color: #000000;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
 }
 
 body {
-  background-color: var(--blackpink-black);
-  color: var(--blackpink-pink);
-  margin: 0;
-  padding: 0;
-}
-
-.App {
-  text-align: center;
+  color: var(--color-text);
   font-family: 'CookieRun', sans-serif;
-  background-color: var(--blackpink-black);
-  color: var(--blackpink-pink);
-  min-height: 100vh;
+  line-height: 1.6;
   letter-spacing: 1px;
-  padding: 20px;
 }
 
+/* 앱 컨테이너 */
+.App {
+  min-height: 100vh;
+  padding: var(--spacing-md);
+  background-color: #000000;
+}
+
+.main-content {
+  background-color: #000000;
+  min-height: 100vh;
+}
+
+/* 타이포그래피 */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   letter-spacing: 2px;
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text);
 }
 
+/* 버튼 스타일 */
 button {
   background-color: transparent;
-  color: var(--blackpink-pink);
-  border: 2px solid var(--blackpink-pink);
-  padding: 12px 24px;
+  color: var(--color-text);
+  border: 2px solid var(--color-primary);
+  padding: var(--spacing-sm) var(--spacing-lg);
   border-radius: 4px;
-  font-family: 'CookieRun', sans-serif;
+  font-family: inherit;
   font-weight: 500;
   font-size: 1rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: var(--transition-normal);
   letter-spacing: 1.5px;
   text-transform: uppercase;
 }
 
 button:hover {
-  background-color: var(--blackpink-pink);
-  color: var(--blackpink-black);
+  background-color: var(--color-primary);
+  color: var(--color-background);
   transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
+/* 입력 필드 스타일 */
 input, select, textarea {
-  background-color: rgba(240, 150, 170, 0.1);
-  border: 1px solid var(--blackpink-pink);
-  color: var(--blackpink-pink);
-  padding: 12px 16px;
+  background-color: var(--color-background-light);
+  border: 1px solid var(--color-primary);
+  color: var(--color-text);
+  padding: var(--spacing-sm);
   border-radius: 4px;
-  font-family: 'CookieRun', sans-serif;
+  font-family: inherit;
   font-size: 1rem;
-  transition: all 0.3s ease;
-  margin: 8px 0;
+  transition: var(--transition-normal);
+  margin: var(--spacing-xs) 0;
 }
 
 input:focus, select:focus, textarea:focus {
   outline: none;
-  border-color: var(--blackpink-light-pink);
-  box-shadow: 0 0 0 2px rgba(240, 150, 170, 0.2);
+  border-color: var(--color-primary-light);
+  box-shadow: var(--shadow-sm);
 }
 
-.App-header {
-  background-color: var(--blackpink-black);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--blackpink-pink);
-}
-
+/* 링크 스타일 */
 .App-link {
-  color: var(--blackpink-light-pink);
+  color: var(--color-text-light);
   text-decoration: none;
   position: relative;
-  transition: all 0.3s ease;
+  transition: var(--transition-normal);
 }
 
 .App-link:hover {
-  color: var(--blackpink-dark-pink);
+  color: var(--color-text-dark);
 }
 
 .App-link::after {
@@ -96,12 +134,29 @@ input:focus, select:focus, textarea:focus {
   height: 1px;
   bottom: -2px;
   left: 0;
-  background-color: var(--blackpink-dark-pink);
-  transition: width 0.3s ease;
+  background-color: var(--color-text-dark);
+  transition: width var(--transition-normal);
 }
 
 .App-link:hover::after {
   width: 100%;
+}
+
+/* 미디어 쿼리 */
+@media (max-width: 768px) {
+  :root {
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+  }
+
+  .App {
+    padding: var(--spacing-sm);
+  }
+
+  button {
+    width: 100%;
+    margin: var(--spacing-xs) 0;
+  }
 }
 
 .App-logo {

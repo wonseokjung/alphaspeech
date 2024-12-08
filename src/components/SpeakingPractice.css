@@ -1,14 +1,14 @@
 :root {
     --primary-color: #4facfe;
     --secondary-color: #00f2fe;
-    --background-color: #1a1a2e;
+    --background-color: #000000;
     --text-color: #fff;
     --highlight-bg: rgba(255, 255, 255, 0.05);
     --box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   }
   
   .speaking-practice {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    background: #000000;
     min-height: 100vh;
     padding: 0;
     color: #e9ecef;

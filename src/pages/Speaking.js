@@ -33,10 +33,31 @@ function Speaking() {
       };
 
       sr.onend = () => {
-        setIsRecording(false);
+        if (isRecording) {
+          try {
+            sr.start();
+          } catch (error) {
+            console.log('Failed to restart recording:', error);
+            setIsRecording(false);
+          }
+        }
+      };
+
+      sr.onerror = (event) => {
+        console.log('Speech Recognition Error:', event.error);
+        if (event.error === 'not-allowed') {
+          alert('마이크 권한을 허용해주세요.');
+          setIsRecording(false);
+        }
       };
 
       setRecognition(sr);
+
+      return () => {
+        sr.abort();
+        setIsRecording(false);
+        setTranscript('');
+      };
     } else {
       setSupportSpeechRecognition(false);
     }
@@ -115,17 +136,26 @@ function Speaking() {
     }
   };
 
-  const toggleRecording = () => {
-    if (isRecording) {
-      recognition?.stop();
-      handleResponseComplete({ transcript });
+  const toggleRecording = useCallback(() => {
+    if (!recognition) return;
+
+    try {
+      if (isRecording) {
+        recognition.stop();
+        handleResponseComplete({ transcript });
+        setIsRecording(false);
+        setTranscript('');
+      } else {
+        recognition.abort();
+        recognition.start();
+        setIsRecording(true);
+      }
+    } catch (error) {
+      console.log('Speech Recognition Error:', error);
       setIsRecording(false);
       setTranscript('');
-    } else {
-      recognition?.start();
-      setIsRecording(true);
     }
-  };
+  }, [isRecording, recognition, transcript, handleResponseComplete]);
 
   const slideVariants = useMemo(() => ({
     enter: (direction) => ({
@@ -147,26 +177,8 @@ function Speaking() {
   return (
     <div className="speaking-page">
       <h1>말하기 연습</h1>
-      <AnimatePresence initial={false} custom={direction} mode="wait">
-        <motion.div
-          key={currentStep}
-          custom={direction}
-          variants={slideVariants}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          transition={{
-            x: { type: "spring", stiffness: 300, damping: 30 },
-            opacity: { duration: 0.2 }
-          }}
-          className="question-container"
-        >
-          <h2>질문 {currentStep + 1}</h2>
-          <p>{videoQuestions[currentStep].question}</p>
-        </motion.div>
-      </AnimatePresence>
       
-      {!isStarted ? (
+      {!isStarted && (
         <div className="start-container">
           <h2>준비가 되셨나요?</h2>
           <p>시작 버튼을 클릭하면 비디오가 재생됩니다.</p>
@@ -178,7 +190,30 @@ function Speaking() {
             시작하기
           </button>
         </div>
-      ) : (
+      )}
+
+      {isStarted && (
+        <AnimatePresence initial={false} custom={direction} mode="wait">
+          <motion.div
+            key={currentStep}
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { type: "spring", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 }
+            }}
+            className="question-container"
+          >
+            <h2>질문 {currentStep + 1}</h2>
+            <p>{videoQuestions[currentStep].question}</p>
+          </motion.div>
+        </AnimatePresence>
+      )}
+      
+      {isStarted && (
         <div className="practice-container">
           <div className="videos-section">
             <div className="video-wrapper dani-video">
@@ -209,13 +244,15 @@ function Speaking() {
 
           <div className="controls-section">
             <div className={`navigation-controls ${isRecording ? 'recording' : ''}`}>
-              <button 
-                className={`nav-button ${currentStep === 0 ? 'disabled' : ''}`}
-                onClick={handlePrevious}
-                disabled={currentStep === 0}
-              >
-                이전 질문
-              </button>
+              {!isRecording && (
+                <button 
+                  className={`nav-button ${currentStep === 0 ? 'disabled' : ''}`}
+                  onClick={handlePrevious}
+                  disabled={currentStep === 0}
+                >
+                  이전 질문
+                </button>
+              )}
               <button
                 className={`nav-button ${isRecording ? 'recording' : ''}`}
                 onClick={toggleRecording}
