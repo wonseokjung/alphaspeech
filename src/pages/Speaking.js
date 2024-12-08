@@ -17,6 +17,12 @@ function Speaking() {
   const videoRef = useRef(null);
   const recognitionRef = useRef(null);
   const [recognition, setRecognition] = useState(null);
+  const [userInfo, setUserInfo] = useState({
+    name: '',
+    age: '',
+    gender: '',
+    email: ''
+  });
 
   useEffect(() => {
     if ('webkitSpeechRecognition' in window) {
@@ -174,6 +180,11 @@ function Speaking() {
     })
   }), []);
 
+  const handleUserInfoSubmit = (e) => {
+    e.preventDefault();
+    setIsStarted(true);
+  };
+
   return (
     <div className="speaking-page">
       <h1>말하기 연습</h1>
@@ -181,14 +192,55 @@ function Speaking() {
       {!isStarted && (
         <div className="start-container">
           <h2>준비가 되셨나요?</h2>
-          <p>시작 버튼을 클릭하면 비디오가 재생됩니다.</p>
-          <button 
-            className="start-button" 
-            onClick={handleStart}
-            aria-label="연습 시작하기"
-          >
-            시작하기
-          </button>
+          <form onSubmit={handleUserInfoSubmit} className="user-info-form">
+            <div className="form-group">
+              <label htmlFor="name">이름</label>
+              <input
+                type="text"
+                id="name"
+                value={userInfo.name}
+                onChange={(e) => setUserInfo({...userInfo, name: e.target.value})}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="age">나이</label>
+              <input
+                type="number"
+                id="age"
+                value={userInfo.age}
+                onChange={(e) => setUserInfo({...userInfo, age: e.target.value})}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="gender">성별</label>
+              <select
+                id="gender"
+                value={userInfo.gender}
+                onChange={(e) => setUserInfo({...userInfo, gender: e.target.value})}
+                required
+              >
+                <option value="">선택해주세요</option>
+                <option value="male">남성</option>
+                <option value="female">여성</option>
+                <option value="other">기타</option>
+              </select>
+            </div>
+            <div className="form-group">
+              <label htmlFor="email">리포트 받을 이메일</label>
+              <input
+                type="email"
+                id="email"
+                value={userInfo.email}
+                onChange={(e) => setUserInfo({...userInfo, email: e.target.value})}
+                required
+              />
+            </div>
+            <button type="submit" className="start-button">
+              시작하기
+            </button>
+          </form>
         </div>
       )}
 
