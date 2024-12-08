@@ -22,8 +22,11 @@ jobs:
         with:
           node-version: '18'
           
-      - name: Install Dependencies
-        run: npm install --legacy-peer-deps
+      - name: Clean install dependencies
+        run: |
+          npm cache clean --force
+          rm -rf node_modules package-lock.json
+          npm install --legacy-peer-deps --force
         
       - name: Build And Deploy
         id: builddeploy
@@ -35,7 +38,8 @@ jobs:
           app_location: "/"
           api_location: ""
           output_location: "build"
-          app_build_command: "CI=false npm run build"
+          app_build_command: "CI=false react-scripts build"
+          skip_app_build: false
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
