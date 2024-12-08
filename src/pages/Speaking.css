@@ -1,0 +1,248 @@
+.speaking-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  padding: 2rem;
+  padding-top: 8rem;
+  color: #fff;
+  margin-top: 80px;
+}
+
+.speaking-page h1 {
+  display: none;
+}
+
+.first-question {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 10px;
+  margin: 0 auto 2rem;
+  max-width: 800px;
+  backdrop-filter: blur(10px);
+}
+
+.start-container {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 3rem;
+  border-radius: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  backdrop-filter: blur(10px);
+}
+
+.practice-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.videos-section {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.video-wrapper {
+  flex: 1;
+  position: relative;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.video-wrapper video {
+  width: 100%;
+  border-radius: 15px;
+  display: block;
+}
+
+.question-container {
+  background: none;
+  padding: 0;
+  margin: 1rem auto;
+  text-align: center;
+  max-width: 800px;
+}
+
+.question-container h2 {
+  color: #4facfe;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.question-container p {
+  font-size: 1.2rem;
+  line-height: 1.4;
+  margin: 0;
+  color: #fff;
+}
+
+.controls-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.navigation-controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.nav-button {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 140px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+}
+
+.nav-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.nav-button.recording {
+  background: linear-gradient(135deg, #ff3366 0%, #ff0066 100%);
+  box-shadow: 0 4px 15px rgba(255, 51, 102, 0.3);
+}
+
+.nav-button.recording:hover {
+  background: linear-gradient(135deg, #ff0066 0%, #ff3366 100%);
+  box-shadow: 0 8px 25px rgba(255, 51, 102, 0.4);
+}
+
+.progress-indicator {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.progress-text {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: #4facfe;
+}
+
+.progress-bar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  transition: width 0.3s ease;
+}
+
+.transcript-box {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: 15px;
+  margin-top: 2rem;
+  backdrop-filter: blur(10px);
+}
+
+.transcript-box h3 {
+  color: #4facfe;
+  margin-bottom: 1rem;
+}
+
+.realtime-transcript {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: 15px;
+  margin: 1rem 0;
+  width: 100%;
+  max-width: 800px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.realtime-transcript h3 {
+  color: #4facfe;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.realtime-transcript h3::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background-color: #4facfe;
+  border-radius: 50%;
+  display: inline-block;
+  animation: blink 1s infinite;
+}
+
+.realtime-transcript p {
+  color: #fff;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+@media (max-width: 900px) {
+  .speaking-page {
+    padding: 1rem;
+    padding-top: 7rem;
+    margin-top: 70px;
+  }
+
+  .videos-section {
+    flex-direction: column;
+  }
+
+  .video-wrapper {
+    width: 100%;
+  }
+
+  .navigation-controls {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .nav-button {
+    width: 100%;
+  }
+}
+
+.navigation-controls.recording .nav-button:not(.recording) {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+} 

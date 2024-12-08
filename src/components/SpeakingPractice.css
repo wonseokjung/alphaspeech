@@ -1,0 +1,203 @@
+:root {
+    --primary-color: #4facfe;
+    --secondary-color: #00f2fe;
+    --background-color: #1a1a2e;
+    --text-color: #fff;
+    --highlight-bg: rgba(255, 255, 255, 0.05);
+    --box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  }
+  
+  .speaking-practice {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    min-height: 100vh;
+    padding: 0;
+    color: #e9ecef;
+  }
+  
+  .loading, .error-message {
+    text-align: center;
+    padding: 2rem;
+    color: #0066ff;
+    font-size: 1.2rem;
+  }
+  
+  .videos-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .video-wrapper {
+    flex: 1;
+    min-width: 300px;
+    max-width: 600px;
+    position: relative;
+    margin: 0;
+    padding-top: 56.25%;
+    height: 0;
+  }
+  
+  .video-wrapper:hover {
+    transform: translateY(-5px);
+  }
+  
+  .video-wrapper video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  .video-wrapper.user-video {
+    margin: 0;
+  }
+  
+  .face-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  
+  .video-title {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    color: white;
+    backdrop-filter: blur(5px);
+    white-space: nowrap;
+  }
+  
+  .video-status {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    color: white;
+    backdrop-filter: blur(5px);
+  }
+  
+  .status-detected {
+    color: #00ff88;
+    margin-right: 1rem;
+  }
+  
+  .status-emotion {
+    color: #fff;
+  }
+  
+  .controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  
+  .record-button {
+    background: linear-gradient(135deg, #0066ff 0%, #5c27fe 100%);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(92, 39, 254, 0.3);
+  }
+  
+  .record-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(92, 39, 254, 0.4);
+  }
+  
+  .record-button.recording {
+    background: linear-gradient(135deg, #ff3366 0%, #ff0066 100%);
+    animation: pulse 2s infinite;
+  }
+  
+  .recording-indicator {
+    color: #ff3366;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .recording-indicator::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: #ff3366;
+    border-radius: 50%;
+    animation: blink 1s infinite;
+  }
+  
+  .transcript {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 1rem;
+    margin-top: 2rem;
+    backdrop-filter: blur(10px);
+  }
+  
+  .transcript h3 {
+    color: #0066ff;
+    margin-bottom: 1rem;
+  }
+  
+  .error-message {
+    background: rgba(255, 59, 59, 0.1);
+    color: #ff3b3b;
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+    margin: 1rem 0;
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  
+  @keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @media (max-width: 900px) {
+    .videos-container {
+      flex-direction: column;
+      padding: 0.5rem;
+    }
+    
+    .video-wrapper {
+      min-width: 250px;
+      margin-bottom: 1rem;
+    }
+    
+    .video-title {
+      font-size: 0.7rem;
+    }
+  }
+  

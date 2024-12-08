@@ -11,6 +11,7 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import ForgotPassword from './pages/ForgotPassword';
 import Navbar from './components/Navbar';
+import Speaking from './pages/Speaking';
 import './styles/fonts.css';
 import './styles/pages.css';
 import Preview from './pages/Preview';
@@ -33,6 +34,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/preview" element={<Preview />} />
+            <Route path="/speaking" element={<Speaking />} />
           </Routes>
         </main>
       </div>

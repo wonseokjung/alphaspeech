@@ -26,7 +26,73 @@ ChartJS.register(
 const Results = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { answer, dominantEmotion } = location.state || {};
+  const { responses } = location.state || { responses: [] };
+  
+  const emotionLabels = {
+    neutral: '중립',
+    happy: '행복',
+    sad: '슬픔',
+    angry: '화남',
+    fearful: '두려움',
+    disgusted: '싫음',
+    surprised: '놀람'
+  };
+
+  // 모든 응답의 감정 데이터를 분석하여 주요 감정 찾기
+  const getDominantEmotion = () => {
+    if (!responses || responses.length === 0) {
+      return {
+        type: 'neutral',
+        name: '중립',
+        score: 0
+      };
+    }
+
+    const totalEmotions = responses.reduce((acc, response) => {
+      if (response?.emotions) {
+        Object.entries(response.emotions).forEach(([emotion, value]) => {
+          acc[emotion] = (acc[emotion] || 0) + value;
+        });
+      }
+      return acc;
+    }, {});
+
+    // 감정 데이터가 없는 경우 처리
+    if (Object.keys(totalEmotions).length === 0) {
+      return {
+        type: 'neutral',
+        name: '중립',
+        score: 0
+      };
+    }
+
+    // 평균 계산
+    Object.keys(totalEmotions).forEach(emotion => {
+      totalEmotions[emotion] = totalEmotions[emotion] / responses.length;
+    });
+
+    // 가장 높은 감정 찾기
+    const sortedEmotions = Object.entries(totalEmotions)
+      .sort(([, a], [, b]) => b - a);
+
+    if (sortedEmotions.length === 0) {
+      return {
+        type: 'neutral',
+        name: '중립',
+        score: 0
+      };
+    }
+
+    const [type, value] = sortedEmotions[0];
+    
+    return {
+      type,
+      name: emotionLabels[type] || '중립',
+      score: Math.round(value * 100)
+    };
+  };
+
+  const dominantEmotion = getDominantEmotion();
 
   // 감정에 따른 피드백 생성
   const getFeedback = (emotion) => {
@@ -77,7 +143,7 @@ const Results = () => {
         ]
       },
       disgusted: {
-        title: '솔직하게 감정을 표현했어요 💫',
+        title: '솔직하게 감정을 표현했어요 🌟💫',
         description: '불쾌한 감정도 인식하고 표현할 줄 아는 것은 중요해요.',
         tips: [
           '부정적인 감정도 건강하게 표현하는 방법이 있어요.',
@@ -101,7 +167,7 @@ const Results = () => {
 
   const feedback = getFeedback(dominantEmotion);
 
-  // 도넛 차트 데이터
+  // 도넛 차트 데이터 업데이트
   const doughnutData = {
     labels: ['주요 감정', '기타'],
     datasets: [{
@@ -112,12 +178,38 @@ const Results = () => {
     }]
   };
 
-  // 바 차트 데이터
+  // 바 차트 데이터 업데이트
+  const getAverageEmotions = () => {
+    if (!responses || responses.length === 0) {
+      return Array(7).fill(0);
+    }
+
+    const totalEmotions = responses.reduce((acc, response) => {
+      if (response?.emotions) {
+        Object.entries(response.emotions).forEach(([emotion, value]) => {
+          acc[emotion] = (acc[emotion] || 0) + value;
+        });
+      }
+      return acc;
+    }, {});
+
+    if (Object.keys(totalEmotions).length === 0) {
+      return Array(7).fill(0);
+    }
+
+    Object.keys(totalEmotions).forEach(emotion => {
+      totalEmotions[emotion] = (totalEmotions[emotion] / responses.length) * 100;
+    });
+
+    return ['happy', 'sad', 'angry', 'neutral', 'fearful', 'disgusted', 'surprised']
+      .map(emotion => totalEmotions[emotion] || 0);
+  };
+
   const barData = {
     labels: ['행복', '슬픔', '분노', '중립', '두려움', '혐오', '놀람'],
     datasets: [{
       label: '감정 분포',
-      data: [65, 45, 30, 25, 20, 15, 10], // 실제 데이터로 교체 필요
+      data: getAverageEmotions(),
       backgroundColor: [
         'rgba(0, 255, 136, 0.8)',
         'rgba(0, 225, 255, 0.8)',
@@ -158,7 +250,7 @@ const Results = () => {
         <div className="report-meta">
           <h1>AI 감정 분석 리포트</h1>
           <div className="report-info">
-            <span>분석 일시: {new Date().toLocaleDateString('ko-KR')}</span>
+            <span>분��� 일시: {new Date().toLocaleDateString('ko-KR')}</span>
             <span>리포트 ID: {Math.random().toString(36).substr(2, 9)}</span>
           </div>
         </div>
@@ -221,6 +313,33 @@ const Results = () => {
         </section>
 
         <section className="analysis-section">
+          <h2>3. 답변 분석</h2>
+          <div className="answer-analysis">
+            {responses?.map((response, index) => (
+              <div key={index} className="response-item">
+                <h4>질문 {index + 1} 답변</h4>
+                <div className="answer-box">
+                  <p>{response.transcript || '답변이 기록되지 않았습니다.'}</p>
+                </div>
+                <div className="emotion-details">
+                  <h5>답변 시 감정 상태</h5>
+                  <ul>
+                    {Object.entries(response.emotions || {})
+                      .sort(([, a], [, b]) => b - a)
+                      .slice(0, 3)
+                      .map(([emotion, value]) => (
+                        <li key={emotion}>
+                          {emotionLabels[emotion]}: {(value * 100).toFixed(1)}%
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="analysis-section">
           <h2>2. 전문가 피드백</h2>
           <div className="feedback-content">
             <div className="feedback-header">
@@ -238,16 +357,6 @@ const Results = () => {
                   </li>
                 ))}
               </ul>
-            </div>
-          </div>
-        </section>
-
-        <section className="analysis-section">
-          <h2>3. 답변 분석</h2>
-          <div className="answer-analysis">
-            <h4>원문</h4>
-            <div className="answer-box">
-              <p>{answer || '답변이 기록되지 않았습니다.'}</p>
             </div>
           </div>
         </section>
@@ -270,7 +379,7 @@ const Results = () => {
               ></iframe>
             </div>
             <div className="program-description">
-              <h4>프로그램 설명</h4>
+              <h4>프로그램 설명명</h4>
               <p>이 교육 프로그램은 당신의 감정 분석 결과를 바탕으로 맞춤 추천된 콘텐츠입니다. 
                  영상을 통해 감정 지능을 향상시키고 더 나은 소통 방법을 배워보세요.</p>
             </div>

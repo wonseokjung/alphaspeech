@@ -48,6 +48,10 @@ const Navbar = () => {
             <span className="nav-icon">🔑</span>
             <span className="nav-text">로그인</span>
           </Link>
+          <Link to="/speaking" className={`nav-link ${location.pathname === '/speaking' ? 'active' : ''}`}>
+            <span className="nav-icon">🎤</span>
+            <span className="nav-text">말하기 연습</span>
+          </Link>
           <button 
             className="theme-toggle"
             onClick={toggleTheme}
