@@ -24,7 +24,7 @@ jobs:
           
       - name: Install Dependencies
         run: |
-          npm install --legacy-peer-deps --force
+          npm install --force
         
       - name: Build And Deploy
         id: builddeploy
@@ -36,7 +36,7 @@ jobs:
           app_location: "/"
           api_location: ""
           output_location: "build"
-          app_build_command: "CI=false SKIP_PREFLIGHT_CHECK=true npm run build"
+          app_build_command: "CI=false npm run build"
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
