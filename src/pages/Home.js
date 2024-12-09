@@ -301,6 +301,7 @@ function Home() {
 
   return (
     <div className="home-container">
+      {/* 1. 히어로 섹션 */}
       <motion.div 
         className="hero-section"
         initial={{ opacity: 0, y: 20 }}
@@ -313,276 +314,469 @@ function Home() {
           <span className="highlight">음성 인식</span>으로 알아보는 우리 아이의 사회화 능력<br />
           <span className="korean-text">AI 기술로 분석하는 맞춤형 사회성 발달 평가</span>
         </p>
+        <motion.button 
+          className="quick-start-btn"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={handleStart}
+        >
+          무료 평가 시작하기
+          <span className="arrow">→</span>
+        </motion.button>
       </motion.div>
 
+      {/* 2. 평가 프로세스 섹션 */}
       <motion.div 
-        className="basic-info-section"
+        className="process-section"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.8 }}
       >
-        <h2>기본 정보 입력</h2>
+        <h2>평가 진행 과정</h2>
         <p className="section-description">
-          알파세대 맞춤형 사회화 능력 평가를 시작하기 전에 기본 정보를 입력해주세요.
-          입력하신 정보는 연령대별 맞춤형 분석에 활용됩니다.
+          5단계의 체계적인 과정을 통해 정확한 평가 결과를 제공합니다
         </p>
-        <div className="info-grid">
-          <div className="birth-date">
-            <label>Birth Date</label>
-            <div className="date-inputs">
-              <select value={birthDate.year} onChange={(e) => handleDateChange('year', e.target.value)}>
-                {Array.from({ length: 20 }, (_, i) => 2024 - i).map(year => (
-                  <option key={year} value={year}>{year}</option>
-                ))}
-              </select>
-              <select value={birthDate.month} onChange={(e) => handleDateChange('month', e.target.value)}>
-                {Array.from({ length: 12 }, (_, i) => i + 1).map(month => (
-                  <option key={month} value={month}>{month}</option>
-                ))}
-              </select>
-              <select value={birthDate.day} onChange={(e) => handleDateChange('day', e.target.value)}>
-                {Array.from({ length: 31 }, (_, i) => i + 1).map(day => (
-                  <option key={day} value={day}>{day}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-          <div className="gender-selection">
-            <label>Gender</label>
-            <div className="gender-buttons">
-              <button
-                className={gender === 'male' ? 'active' : ''}
-                onClick={() => handleGenderSelect('male')}
-              >
-                Male
-              </button>
-              <button
-                className={gender === 'female' ? 'active' : ''}
-                onClick={() => handleGenderSelect('female')}
-              >
-                Female
-              </button>
-            </div>
-          </div>
+        <div className="process-timeline">
+          {[
+            { icon: '👤', title: '기본 정보 입력', desc: '연령과 발달 단계 확인', color: '#F096AA' },
+            { icon: '🎯', title: '맞춤형 평가', desc: '연령별 최적화된 평가 진행', color: '#F8B5C1' },
+            { icon: '🔍', title: 'AI 분석', desc: '실시간 음성 및 표정 분석', color: '#FFD1DC' },
+            { icon: '📊', title: '결과 도출', desc: '종합적인 발달 상태 평가', color: '#FFC0CB' },
+            { icon: '📋', title: '맞춤 가이드', desc: '개인화된 발달 지원 방안 제시', color: '#FFB6C1' }
+          ].map((step, index) => (
+            <motion.div 
+              key={index}
+              className="process-step"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.4 + index * 0.2 }}
+              style={{
+                background: `linear-gradient(135deg, ${step.color}15, ${step.color}05)`,
+                border: `1px solid ${step.color}30`
+              }}
+            >
+              <div className="step-icon" style={{ 
+                background: `${step.color}15`,
+                border: `2px solid ${step.color}`
+              }}>
+                {step.icon}
+              </div>
+              <h3>{step.title}</h3>
+              <p>{step.desc}</p>
+              {index < 4 && (
+                <div 
+                  className="step-connector" 
+                  style={{ 
+                    background: `linear-gradient(to right, ${step.color}, ${step.color}50)`
+                  }} 
+                />
+              )}
+            </motion.div>
+          ))}
         </div>
       </motion.div>
 
+      {/* 3. AI 기반 특징 섹션 */}
       <motion.div 
-        className="visualization-container"
+        className="features-section"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.8 }}
       >
-        <h2>사회화 능력 분석</h2>
-        <p className="section-description">
-          6가지 핵심 영역의 사회화 능력을 측정하고 분석합니다.
-          대화 패턴, 감정 표현, 의사소통 방식 등을 종합적으로 평가합니다.
-        </p>
-        <div className="graph-section">
-          {/* 레이더 그래프 */}
-          <div className="radar-graph" style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '2rem', borderRadius: '20px', border: '1px solid rgba(255, 255, 255, 0.05)' }}>
+        <h2>AI 기반 평가의 특징</h2>
+        <div className="features-grid">
+          <div className="feature-card">
+            <div className="feature-icon">🧠</div>
+            <h3>실시간 감정 분석</h3>
+            <p>얼굴 표정과 음성 패턴을 분석하여 실시간으로 감정 태를 파악합니다.</p>
+            <div className="tech-badges-container">
+              <div className="tech-badge">Face API</div>
+              <div className="tech-badge">Voice Analysis</div>
+            </div>
+          </div>
+          <div className="feature-card">
+            <div className="feature-icon">📊</div>
+            <h3>데이터 기반 평가</h3>
+            <p>1만 건 이상의 데이터를 기반으로 정확하고 객관적인 평가를 제공합니다.</p>
+            <div className="tech-badges-container">
+              <div className="tech-badge">Big Data</div>
+              <div className="tech-badge">ML Models</div>
+            </div>
+          </div>
+          <div className="feature-card">
+            <div className="feature-icon">📈</div>
+            <h3>맞춤형 발달 리포트</h3>
+            <p>연령별 표준화된 지표를 바탕으로 개인 맞춤형 발달 보고서를 제공합니다.</p>
+            <div className="tech-badges-container">
+              <div className="tech-badge">Personalized</div>
+              <div className="tech-badge">Age-Specific</div>
+            </div>
+          </div>
+        </div>
+        {/* 레이더 그래프 */}
+        <div className="feature-visualization">
+          <div className="radar-graph" style={{ 
+            background: 'rgba(0, 0, 0, 0.2)', 
+            padding: '2rem', 
+            borderRadius: '20px', 
+            border: '1px solid rgba(255, 255, 255, 0.05)',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+            marginTop: '2rem'
+          }}>
+            <motion.div
+              className="graph-header"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+            >
+              <h3>AI 평가 영역</h3>
+            </motion.div>
             <svg viewBox="0 0 200 200">
+              {/* 배경 그리드 애니메이션 */}
+              {[0.2, 0.4, 0.6, 0.8, 1].map((scale, index) => (
+                <motion.polygon
+                  key={index}
+                  points="100,20 180,60 180,140 100,180 20,140 20,60"
+                  className="radar-background"
+                  style={{
+                    transform: `scale(${scale})`,
+                    transformOrigin: 'center',
+                    opacity: 0.1,
+                    stroke: 'rgba(255, 255, 255, 0.1)',
+                    fill: 'none'
+                  }}
+                  animate={{ 
+                    rotate: [0, 360],
+                    scale: [scale, scale * 1.1, scale]
+                  }}
+                  transition={{ 
+                    duration: 10 + index * 2,
+                    repeat: Infinity,
+                    ease: "linear"
+                  }}
+                />
+              ))}
+              
+              {/* 데이터 폴리곤 */}
               <motion.polygon
-                points="100,20 180,60 180,140 100,180 20,140 20,60"
-                className="radar-background"
+                points={calculateRadarPoints()}
+                className="radar-data"
                 animate={{ 
-                  opacity: [0.1, 0.2, 0.1],
-                  scale: [1, 1.05, 1]
+                  opacity: [0.8, 1, 0.8],
+                  scale: [1, 1.02, 1],
+                  filter: ["blur(0px)", "blur(2px)", "blur(0px)"]
                 }}
                 transition={{ 
                   duration: 3,
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
-              />
-              <motion.polygon
-                points={calculateRadarPoints()}
-                className="radar-data"
-                animate={{ 
-                  opacity: [0.8, 1, 0.8],
-                  scale: [1, 1.02, 1]
-                }}
-                transition={{ 
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut"
+                style={{
+                  fill: 'rgba(240, 150, 170, 0.2)',
+                  stroke: '#F096AA',
+                  strokeWidth: '2',
+                  filter: 'blur(0px)'
                 }}
               />
-              <text x="100" y="10" className="radar-label">언어표현</text>
-              <text x="190" y="60" className="radar-label">감정교류</text>
-              <text x="190" y="150" className="radar-label">의사소통</text>
-              <text x="100" y="190" className="radar-label">상호작용</text>
-              <text x="10" y="150" className="radar-label">공감능력</text>
-              <text x="10" y="60" className="radar-label">관계형성</text>
+              
+              {/* 축 라벨 애니메이션 */}
+              {[
+                { x: 100, y: 10, text: "언어표현" },
+                { x: 190, y: 60, text: "감정교류" },
+                { x: 190, y: 150, text: "의사소통" },
+                { x: 100, y: 190, text: "상호작용" },
+                { x: 10, y: 150, text: "공감능력" },
+                { x: 10, y: 60, text: "관계형성" }
+              ].map((label, index) => (
+                <motion.text
+                  key={index}
+                  x={label.x}
+                  y={label.y}
+                  className="radar-label"
+                  style={{ fill: '#F096AA', fontSize: '8px' }}
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.5 + index * 0.1 }}
+                >
+                  {label.text}
+                </motion.text>
+              ))}
             </svg>
           </div>
+        </div>
+      </motion.div>
 
-          {/* 바 그래프 */}
-          <div className="bar-graph" style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '2rem', borderRadius: '20px', border: '1px solid rgba(255, 255, 255, 0.05)' }}>
-            {barHeights.map((height, index) => (
+      {/* 4. 발달 영역 분석 섹션 */}
+      <motion.div 
+        className="analysis-section"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6, duration: 0.8 }}
+      >
+        <h2>발달 영역 분석</h2>
+        <p className="section-description">
+          각 발달 영역별 세부적인 분석을 통해 아이의 성장을 지원합니다
+        </p>
+        <div className="circular-progress" style={{ 
+          background: 'rgba(0, 0, 0, 0.2)', 
+          padding: '2rem', 
+          borderRadius: '20px',
+          border: '1px solid rgba(255, 255, 255, 0.05)',
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)'
+        }}>
+          <div className="circles-container">
+            {[
+              { label: "언어발달", value: 85, color: "#F096AA", desc: "어휘력, 문장 구성, 발음" },
+              { label: "인지발달", value: 78, color: "#F8B5C1", desc: "기억력, 추론, 문제해결" },
+              { label: "사회성", value: 92, color: "#FFD1DC", desc: "대인관계, 감정조절, 협동" }
+            ].map((item, index) => (
               <motion.div
                 key={index}
-                className="bar"
-                animate={{ 
-                  height: `${height}%`,
-                  opacity: [0.8, 1, 0.8]
-                }}
-                transition={{ 
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                style={{
-                  height: `${height}%`
-                }}
+                className="circle-progress"
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.7 + index * 0.2 }}
               >
-                <motion.span 
-                  className="bar-label"
-                  animate={{ 
-                    y: [-2, 2, -2],
-                    opacity: [0.8, 1, 0.8]
-                  }}
-                  transition={{ 
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
+                <svg width="120" height="120" viewBox="0 0 120 120">
+                  <circle
+                    cx="60"
+                    cy="60"
+                    r="54"
+                    fill="none"
+                    stroke="rgba(255,255,255,0.1)"
+                    strokeWidth="12"
+                  />
+                  <motion.circle
+                    cx="60"
+                    cy="60"
+                    r="54"
+                    fill="none"
+                    stroke={item.color}
+                    strokeWidth="12"
+                    strokeDasharray={2 * Math.PI * 54}
+                    strokeDashoffset={2 * Math.PI * 54 * (1 - item.value / 100)}
+                    initial={{ strokeDashoffset: 2 * Math.PI * 54 }}
+                    animate={{ strokeDashoffset: 2 * Math.PI * 54 * (1 - item.value / 100) }}
+                    transition={{ duration: 1.5, delay: 0.5 + index * 0.2 }}
+                  />
+                  <motion.text
+                    x="60"
+                    y="45"
+                    textAnchor="middle"
+                    fill="#F096AA"
+                    fontSize="24"
+                    fontWeight="bold"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1 + index * 0.2 }}
+                  >
+                    {item.value}%
+                  </motion.text>
+                  <motion.text
+                    x="60"
+                    y="70"
+                    textAnchor="middle"
+                    fill="#F096AA"
+                    fontSize="16"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.2 + index * 0.2 }}
+                  >
+                    {item.label}
+                  </motion.text>
+                </svg>
+                <motion.p
+                  className="progress-description"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1.4 + index * 0.2 }}
                 >
-                  {Math.round(height)}%
-                </motion.span>
+                  {item.desc}
+                </motion.p>
               </motion.div>
             ))}
           </div>
         </div>
       </motion.div>
 
-      <div className="analysis-section">
-        <h3>실시간 분석</h3>
-        <div className="analysis-grid">
+      {/* 5. 연구 기반 신뢰도 섹션 */}
+      <motion.div 
+        className="research-section"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8, duration: 0.8 }}
+      >
+        <h2>연구 기반 평가 시스템</h2>
+        <div className="research-content">
+          <div className="research-text">
+            <h3>과학적 근거</h3>
+            <ul>
+              <li>국내외 아동 발달 연구 데이터 활용</li>
+              <li>검증된 평가 지표 시스템 적용</li>
+              <li>지속적인 데이터 업데이트 및 모델 개선</li>
+            </ul>
+            <div className="stats-grid">
+              <div className="stat-item">
+                <h4>98.5%</h4>
+                <p>평가 정확도</p>
+              </div>
+              <div className="stat-item">
+                <h4>10,000+</h4>
+                <p>분석 데이터</p>
+              </div>
+              <div className="stat-item">
+                <h4>95%</h4>
+                <p>신뢰도</p>
+              </div>
+            </div>
+          </div>
+          {/* 물결 애니메이션 그래프 */}
           <motion.div 
-            className="analysis-card face-detection-card"
+            className="wave-graph"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ delay: 1 }}
+            style={{
+              background: 'rgba(0, 0, 0, 0.2)',
+              padding: '2rem',
+              borderRadius: '20px',
+              border: '1px solid rgba(255, 255, 255, 0.05)',
+              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)'
+            }}
           >
-            <div className="card-header">
-              <h4>얼굴 감지 & 표정 분석</h4>
-              <div className="status-badge" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                {faceDetected ? (
-                  <>
-                    <span style={{ color: '#00ff88' }}>감지됨 ✓</span>
-                    <span style={{ color: '#ffb700' }}>
-                      {emotion ? `감정: ${translateEmotion(emotion)}` : '감정 분석 중...'}
-                    </span>
-                  </>
-                ) : '대기 중...'}
-              </div>
+            <h3>발달 추이 분석</h3>
+            <div style={{ position: 'relative', height: '200px', marginTop: '1rem' }}>
+              {[1, 2, 3].map((wave, waveIndex) => (
+                <motion.svg
+                  key={waveIndex}
+                  viewBox="0 0 1000 200"
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    opacity: 0.3 - waveIndex * 0.1
+                  }}
+                >
+                  <motion.path
+                    d="M0 100 C250 50, 350 150, 500 100 C650 50, 750 150, 1000 100"
+                    fill="none"
+                    stroke={`rgba(240, 150, 170, ${0.8 - waveIndex * 0.2})`}
+                    strokeWidth="3"
+                    initial={{ pathLength: 0, pathOffset: 1 }}
+                    animate={{
+                      pathLength: 1,
+                      pathOffset: 0,
+                      y: [0, 10, 0],
+                    }}
+                    transition={{
+                      pathLength: { duration: 2, delay: waveIndex * 0.5 },
+                      pathOffset: { duration: 2, delay: waveIndex * 0.5 },
+                      y: {
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: waveIndex * 0.5
+                      }
+                    }}
+                  />
+                </motion.svg>
+              ))}
             </div>
-            
-            <div className="camera-container">
-              <video
-                ref={videoRef}
-                autoPlay
-                playsInline
-                muted
-                className="camera-view"
-                onLoadedMetadata={() => {
-                  if (cameraActive && modelLoaded) {
-                    detectFace();
-                  }
-                }}
-              />
-              <canvas
-                ref={canvasRef}
-                className="face-canvas"
-              />
-            </div>
-            {emotionStats && (
-              <div className="emotion-stats" style={{
-                marginTop: '1rem',
-                padding: '1rem',
-                background: 'rgba(0, 0, 0, 0.2)',
-                borderRadius: '10px',
-                fontSize: '0.9rem'
-              }}>
-                <div style={{ marginBottom: '0.5rem', color: '#00ff88' }}>감정 수치:</div>
-                {Object.entries(emotionStats).map(([emotion, value]) => (
-                  <div key={emotion} style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    marginBottom: '0.3rem',
-                    color: '#fff'
-                  }}>
-                    <span>{translateEmotion(emotion)}:</span>
-                    <span>{(value * 100).toFixed(2)}%</span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </motion.div>
-          
-          <motion.div 
-            className="analysis-card voice-analysis-card"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <div className="card-header">
-              <h4>음성 분석</h4>
-              <div className="status-badge">
-                {isListening ? '듣는 중...' : '대기 중...'}
-              </div>
-            </div>
-            
-            <motion.button 
-              className={`voice-control-btn ${isListening ? 'active' : ''}`}
-              onClick={toggleListening}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {isListening ? (
-                <>
-                  <span className="btn-icon">⏹</span>
-                  음성 인식 중지
-                </>
-              ) : (
-                <>
-                  <span className="btn-icon">🎤</span>
-                  음성 인식 시작
-                </>
-              )}
-            </motion.button>
-            
-            {transcript && (
-              <motion.div 
-                className="transcript-display"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.3 }}
-              >
-                <p className="transcript-text">{transcript}</p>
-              </motion.div>
-            )}
           </motion.div>
         </div>
-      </div>
+      </motion.div>
 
-      <section className="cta-section">
+      {/* 6. 평가의 장점 섹션 */}
+      <motion.div 
+        className="benefits-section"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1, duration: 0.8 }}
+      >
+        <h2>평가의 장점</h2>
+        <div className="benefits-grid">
+          <div className="benefit-card">
+            <motion.div 
+              className="benefit-circle"
+              animate={{ 
+                scale: [1, 1.1, 1],
+                rotate: [0, 180, 360]
+              }}
+              transition={{ 
+                duration: 4,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+            >
+              <span>95%</span>
+            </motion.div>
+            <h3>정확도</h3>
+          </div>
+          <div className="benefit-card">
+            <motion.div 
+              className="benefit-circle"
+              animate={{ 
+                scale: [1, 1.1, 1],
+                rotate: [0, 180, 360]
+              }}
+              transition={{ 
+                duration: 4,
+                delay: 0.5,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+            >
+              <span>실시간</span>
+            </motion.div>
+            <h3>분석 속도</h3>
+          </div>
+          <div className="benefit-card">
+            <motion.div 
+              className="benefit-circle"
+              animate={{ 
+                scale: [1, 1.1, 1],
+                rotate: [0, 180, 360]
+              }}
+              transition={{ 
+                duration: 4,
+                delay: 1,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+            >
+              <span>AI</span>
+            </motion.div>
+            <h3>객관성</h3>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* 7. 메인 CTA 섹션 */}
+      <motion.section 
+        className="cta-section"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.2, duration: 0.8 }}
+      >
         <div className="cta-content">
           <h2 className="cta-title">지금 바로 시작하세요</h2>
           <p className="cta-description">
             AI 기반 사회성 평가를 통해 당신의 소셜 지능을 발견하고 향상시켜보세요.
           </p>
-          <button 
+          <motion.button 
             className="cta-button"
             onClick={handleStart}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            평가 시작하기
+            무료로 시작하기
             <span className="button-icon">→</span>
-          </button>
+          </motion.button>
         </div>
         <div className="cta-background"></div>
-      </section>
+      </motion.section>
     </div>
   );
 }

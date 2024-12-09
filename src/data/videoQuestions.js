@@ -1,9 +1,9 @@
 export const videoQuestions = [
   {
-    videoUrl: "/video/daniquestionandanswer.mp4",
+    videoUrl: "/video/question1.mp4",
     question: "첫 번째 질문: 다니가 한 말에 대해 어떻게 생각하나요?",
-    startTime: 10,
-    endTime: 20
+    startTime: 0,
+    endTime: 42
   },
   {
     videoUrl: "/video/daniquestionandanswer.mp4",

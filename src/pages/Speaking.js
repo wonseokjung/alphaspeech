@@ -19,10 +19,17 @@ function Speaking() {
   const [recognition, setRecognition] = useState(null);
   const [userInfo, setUserInfo] = useState({
     name: '',
-    age: '',
-    gender: '',
-    email: ''
+    email: '',
+    birthYear: '',
+    birthMonth: '',
+    birthDay: '',
+    gender: ''
   });
+
+  // 년/월/일 옵션 생성
+  const years = Array.from({length: 100}, (_, i) => new Date().getFullYear() - i);
+  const months = Array.from({length: 12}, (_, i) => i + 1);
+  const days = Array.from({length: 31}, (_, i) => i + 1);
 
   useEffect(() => {
     if ('webkitSpeechRecognition' in window) {
@@ -180,19 +187,19 @@ function Speaking() {
     })
   }), []);
 
-  const handleUserInfoSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    const birthDate = `${userInfo.birthYear}-${String(userInfo.birthMonth).padStart(2, '0')}-${String(userInfo.birthDay).padStart(2, '0')}`;
     setIsStarted(true);
   };
 
   return (
     <div className="speaking-page">
-      <h1>말하기 연습</h1>
       
       {!isStarted && (
         <div className="start-container">
           <h2>준비가 되셨나요?</h2>
-          <form onSubmit={handleUserInfoSubmit} className="user-info-form">
+          <form onSubmit={handleSubmit} className="user-info-form">
             <div className="form-group">
               <label htmlFor="name">이름</label>
               <input
@@ -203,13 +210,48 @@ function Speaking() {
                 required
               />
             </div>
+            <div className="form-group birth-date-group">
+              <label>생년월일</label>
+              <div className="birth-date-selects">
+                <select
+                  value={userInfo.birthYear}
+                  onChange={(e) => setUserInfo({...userInfo, birthYear: e.target.value})}
+                  required
+                >
+                  <option value="">년도</option>
+                  {years.map(year => (
+                    <option key={year} value={year}>{year}년</option>
+                  ))}
+                </select>
+                <select
+                  value={userInfo.birthMonth}
+                  onChange={(e) => setUserInfo({...userInfo, birthMonth: e.target.value})}
+                  required
+                >
+                  <option value="">월</option>
+                  {months.map(month => (
+                    <option key={month} value={month}>{month}월</option>
+                  ))}
+                </select>
+                <select
+                  value={userInfo.birthDay}
+                  onChange={(e) => setUserInfo({...userInfo, birthDay: e.target.value})}
+                  required
+                >
+                  <option value="">일</option>
+                  {days.map(day => (
+                    <option key={day} value={day}>{day}일</option>
+                  ))}
+                </select>
+              </div>
+            </div>
             <div className="form-group">
-              <label htmlFor="age">나이</label>
+              <label htmlFor="email">이메일</label>
               <input
-                type="number"
-                id="age"
-                value={userInfo.age}
-                onChange={(e) => setUserInfo({...userInfo, age: e.target.value})}
+                type="email"
+                id="email"
+                value={userInfo.email}
+                onChange={(e) => setUserInfo({...userInfo, email: e.target.value})}
                 required
               />
             </div>
@@ -221,21 +263,10 @@ function Speaking() {
                 onChange={(e) => setUserInfo({...userInfo, gender: e.target.value})}
                 required
               >
-                <option value="">선택해주세요</option>
+                <option value="">선택하세요</option>
                 <option value="male">남성</option>
                 <option value="female">여성</option>
-                <option value="other">기타</option>
               </select>
-            </div>
-            <div className="form-group">
-              <label htmlFor="email">리포트 받을 이메일</label>
-              <input
-                type="email"
-                id="email"
-                value={userInfo.email}
-                onChange={(e) => setUserInfo({...userInfo, email: e.target.value})}
-                required
-              />
             </div>
             <button type="submit" className="start-button">
               시작하기
