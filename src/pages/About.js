@@ -1,142 +1,221 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import './About.css';
 
-function About() {
+const About = () => {
+  const fadeIn = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6 }
+  };
+
+  const qualifications = [
+    { icon: "👩‍🏫", title: "유치원 정교사 2급" },
+    { icon: "👶", title: "보육교사 자격증 2급" },
+    { icon: "💭", title: "교류분석(TACA) 상담사" },
+    { icon: "👨‍👩‍👧‍👦", title: "교류분석(TACA) 부모교육 전문가" },
+    { icon: "🎮", title: "놀이치료/상담사 2급" },
+    { icon: "❤️", title: "아동인권옹호가" },
+    { icon: "👩‍🍳", title: "아동 요리사" }
+  ];
+
+  const education = [
+    {
+      school: "서울 중앙대학교 대학원",
+      degree: "일반대학원 유아교육교육학 석사",
+      icon: "🎓"
+    },
+    {
+      school: "서울 중앙대학교",
+      degree: "사범대학 유아교육 교육학 학사",
+      icon: "🏫"
+    }
+  ];
+
+  const research = [
+    {
+      title: "정서표현에 기반한 인성교육활동이 유아의 자아존중감과 마음이론 발달에 미치는 영향",
+      year: "2017"
+    },
+    {
+      title: "유아의 창의성과 지적능력 공감능력 및 그리기 표상능력 간의 관계분석",
+      year: "2017"
+    }
+  ];
+
+  const productions = [
+    { title: "다니유치원 '다니'", icon: "🌟" },
+    { title: "유라야놀자 '유라'", icon: "🎯" },
+    { title: "KBS TV 유치원 어푸어푸대모험", icon: "📺" },
+    { title: "더 키즈 책 읽어주는 TV", icon: "📚" },
+    { title: "웅진스마트올키즈 기본생활습관", icon: "✏️" }
+  ];
+
+  const experience = [
+    { title: "서울시 영리더 라운드테이블 정책자문위원", icon: "🏛️" },
+    { title: "국가보훈부 '히어로즈 패밀리' 멘토", icon: "🦸‍♀️" },
+    { title: "경기도 미디어소통 TF팀 자문위원", icon: "📱" }
+  ];
+
   return (
-    <div className="page-container about-container">
+    <div className="about-page">
       <motion.div 
-        className="content-section"
-        initial={{ opacity: 0, y: 20 }}
+        className="about-header"
+        initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <h1>놀잇(Noit) AI 리터러시</h1>
-        
-        <div className="video-section">
-          <h2>프로그램 소개 영상</h2>
-          <div className="video-container">
-            <iframe
-              width="100%"
-              height="500"
-              src="https://www.youtube.com/embed/gDM8CdxCj3I"
-              title="AI 리터러시 프로그램 소개"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-          </div>
-        </div>
+        <h1>About Us</h1>
+        <p className="company-intro">
+          놀잇은 아이들의 건강한 성장과 발달을 위한 혁신적인 교육 솔루션을 제공합니다.
+        </p>
+      </motion.div>
 
-        <div className="company-intro">
-          <h2>회사 소개</h2>
-          <p>
-            놀잇(Noit)은 중앙대학교 학사, 석사 출신의 최다은 대표가 설립한 
-            교육 혁신 기업입니다. 우리는 아이들이 미래 사회의 주역으로 성장할 수 있도록
-            혁신적인 교육 솔루션을 제공합니다.
-          </p>
-          <div className="founder-info">
-            <h3>대표 소개</h3>
-            <ul>
-              <li>최다은 대표</li>
-              <li>중앙대학교 컴퓨터공학 학사</li>
-              <li>중앙대학교 인공지능 석사</li>
-              <li>전) 삼성전자 소프트웨어 엔지니어</li>
-              <li>현) 한국교육학회 AI교육분과 위원</li>
-              <li>교육부 AI교육 자문위원</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="program-intro">
-          <h2>프로그램 소개</h2>
-          <p>
-            AI 리터러시는 초등학생들을 위한 특별한 인공지능 교육 프로그램입니다. 
-            게임과 같은 재미있는 상호작용을 통해 아이들이 자연스럽게 
-            인공지능의 개념과 원리를 이해할 수 있도록 설계되었습니다.
-          </p>
-          <div className="program-details">
-            <h3>교육 내용</h3>
-            <ul>
-              <li>
-                <strong>AI 기초 이해:</strong> 인공지능의 기본 개념과 작동 원리
-              </li>
-              <li>
-                <strong>AI 윤리:</strong> 인공지능 사용에 있어서의 윤리적 고려사항
-              </li>
-              <li>
-                <strong>AI 활용:</strong> 실생활에서의 인공지능 활용 사례
-              </li>
-              <li>
-                <strong>AI 체험:</strong> 직접 체험해보는 인공지능 기술
-              </li>
-              <li>
-                <strong>AI 미래:</strong> 인공지능이 가져올 미래 사회의 변화
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="features">
-          <h2>주요 특징</h2>
-          <div className="feature-grid">
-            <div className="feature-item">
-              <h3>게임형 학습 시스템</h3>
-              <p>재미있는 게임 요소를 통해 자연스러운 학습 유도</p>
-            </div>
-            <div className="feature-item">
-              <h3>맞춤형 AI 교육</h3>
-              <p>학습자의 수준과 진도에 맞춘 개별화된 커리큘럼</p>
-            </div>
-            <div className="feature-item">
-              <h3>실시간 피드백</h3>
-              <p>AI가 제공하는 즉각적인 학습 피드백</p>
-            </div>
-            <div className="feature-item">
-              <h3>진도 관리</h3>
-              <p>체계적인 학습 진도 관리 및 성취도 분석</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="education-method">
-          <h2>교육 방식</h2>
-          <ul>
-            <li>
-              <strong>체험 중심:</strong> 직접 체험하며 배우는 실습 위주의 교육
-            </li>
-            <li>
-              <strong>프로젝트 기반:</strong> 실제 문제 해결을 통한 학습
-            </li>
-            <li>
-              <strong>단계별 학습:</strong> 기초부터 심화까지 체계적인 커리큘럼
-            </li>
-            <li>
-              <strong>상호작용:</strong> AI와의 실시간 상호작용을 통한 학습
-            </li>
-          </ul>
-        </div>
-
-        <div className="vision">
-          <h2>비전</h2>
-          <p>
-            모든 아이들이 인공지능을 쉽고 재미있게 이해하고, 
-            미래 사회의 주역으로 성장할 수 있도록 돕는 것이 우리의 목표입니다.
-            놀잇은 단순한 교육을 넘어, 아이들이 AI 시대를 이끌어갈 수 있는 
-            창의적이고 혁신적인 인재로 성장할 수 있도록 지원합니다.
-          </p>
-          <div className="vision-points">
-            <h3>우리가 꿈꾸는 미래</h3>
-            <ul>
-              <li>AI 리터러시 교육의 표준을 제시하는 선도 기업</li>
-              <li>모든 아이들에게 평등한 AI 교육 기회 제공</li>
-              <li>재미있고 효과적인 교육 방법의 혁신</li>
-              <li>글로벌 AI 교육 플랫폼으로의 성장</li>
-            </ul>
-          </div>
+      <motion.div 
+        className="video-section"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      >
+        <div className="video-container">
+          <iframe
+            width="853"
+            height="480"
+            src="https://www.youtube.com/embed/gDM8CdxCj3I"
+            title="놀잇 소개 영상"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
         </div>
       </motion.div>
+
+      <div className="about-content">
+        <motion.section 
+          className="education-section"
+          {...fadeIn}
+        >
+          <h2>📚 학력</h2>
+          <div className="education-grid">
+            {education.map((edu, index) => (
+              <motion.div 
+                key={index}
+                className="education-card"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.2 }}
+              >
+                <span className="edu-icon">{edu.icon}</span>
+                <div className="edu-details">
+                  <h3>{edu.school}</h3>
+                  <p>{edu.degree}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+
+        <motion.section 
+          className="qualifications-section"
+          {...fadeIn}
+        >
+          <h2>📜 자격사항</h2>
+          <div className="qualifications-grid">
+            {qualifications.map((qual, index) => (
+              <motion.div 
+                key={index}
+                className="qualification-card"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <span className="qual-icon">{qual.icon}</span>
+                <p>{qual.title}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+
+        <motion.section 
+          className="research-section"
+          {...fadeIn}
+        >
+          <h2>📑 연구 논문</h2>
+          <div className="research-list">
+            {research.map((paper, index) => (
+              <motion.div 
+                key={index}
+                className="research-card"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.3 }}
+              >
+                <h3>{paper.title}</h3>
+                <p className="year">{paper.year}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+
+        <motion.section 
+          className="productions-section"
+          {...fadeIn}
+        >
+          <h2>🎬 제작/출연</h2>
+          <div className="productions-grid">
+            {productions.map((prod, index) => (
+              <motion.div 
+                key={index}
+                className="production-card"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.2 }}
+              >
+                <span className="prod-icon">{prod.icon}</span>
+                <p>{prod.title}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+
+        <motion.section 
+          className="experience-section"
+          {...fadeIn}
+        >
+          <h2>💫 주요 이력</h2>
+          <div className="experience-grid">
+            {experience.map((exp, index) => (
+              <motion.div 
+                key={index}
+                className="experience-card"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.2 }}
+              >
+                <span className="exp-icon">{exp.icon}</span>
+                <p>{exp.title}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+
+        <motion.footer 
+          className="company-footer"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+        >
+          <div className="company-info">
+            <h3>주식회사 놀잇</h3>
+            <p>대표자: 최다은</p>
+            <p>주소: 서울특별시 강남구 선릉로93길 40, 4층</p>
+            <p>이메일: norit@norit.io</p>
+          </div>
+          <p className="copyright">©Norit Co.,Ltd 2024 All Rights Reserved</p>
+        </motion.footer>
+      </div>
     </div>
   );
-}
+};
 
 export default About; 
