@@ -1,0 +1,159 @@
+.results-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: white;
+  color: #333;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+}
+
+.results-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #1a1a1a;
+}
+
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 3rem;
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+}
+
+.results-info {
+  color: #666;
+}
+
+.results-info p {
+  margin: 0.5rem 0;
+}
+
+.results-summary {
+  display: flex;
+  gap: 2rem;
+}
+
+.summary-item {
+  text-align: center;
+}
+
+.summary-item h3 {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.summary-item .score {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2c7be5;
+  margin: 0;
+}
+
+.summary-item .grade {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #2c7be5;
+  margin: 0;
+}
+
+.results-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.radar-chart {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.radar-chart h2 {
+  margin-bottom: 1.5rem;
+  color: #1a1a1a;
+  font-size: 1.5rem;
+}
+
+.competency-analysis {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.competency-analysis h2 {
+  margin-bottom: 1.5rem;
+  color: #1a1a1a;
+  font-size: 1.5rem;
+}
+
+.competency-item {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.competency-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.competency-item h3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  color: #1a1a1a;
+}
+
+.competency-item .score {
+  color: #2c7be5;
+  font-weight: bold;
+}
+
+.strength, .improvement {
+  margin: 0.5rem 0;
+  line-height: 1.5;
+}
+
+.strength {
+  color: #2c7be5;
+}
+
+.improvement {
+  color: #666;
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+
+.error {
+  color: #dc3545;
+}
+
+@media (max-width: 768px) {
+  .results-header {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .results-content {
+    grid-template-columns: 1fr;
+  }
+
+  .results-summary {
+    width: 100%;
+    justify-content: space-around;
+  }
+} 
