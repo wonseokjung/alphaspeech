@@ -11,7 +11,6 @@ function Home() {
     month: '1',
     day: '1'
   });
-  const [gender, setGender] = useState('');
   const [radarPoints, setRadarPoints] = useState([0, 0, 0, 0, 0, 0]);
   const [barHeights, setBarHeights] = useState([0, 0, 0]);
   const [transcript, setTranscript] = useState('');
@@ -259,16 +258,8 @@ function Home() {
     }));
   };
 
-  const handleGenderSelect = (selectedGender) => {
-    setGender(selectedGender);
-  };
-
   const handleStart = () => {
-    if (gender) {
-      navigate('/assessment');
-    } else {
-      alert('성별을 선택해주세요!');
-    }
+    navigate('/speaking');
   };
 
   const calculateRadarPoints = () => {

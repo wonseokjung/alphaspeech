@@ -238,8 +238,12 @@ function SpeakingPractice({ onComplete }) {
           
           {transcript && (
             <div className="transcript" aria-label="음성 인식 결과">
-              <h3>음성 인식 결과:</h3>
-              <p>{transcript}</p>
+              <h3>실시간 음성 인식 중</h3>
+              <p>
+                {transcript.split(' ').map((word, index) => (
+                  <span key={index}>{word} </span>
+                ))}
+              </p>
             </div>
           )}
         </>

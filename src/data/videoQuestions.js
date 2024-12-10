@@ -1,44 +1,67 @@
 export const videoQuestions = [
   {
-    videoUrl: "/video/question1.mp4",
-    question: "첫 번째 질문: 다니가 한 말에 대해 어떻게 생각하나요?",
+    videoUrl: "https://opct.blob.core.windows.net/alphatest/q1.mp4",
+    question: "1번 문항: 새로운 신상 아이폰을 사고 싶은데, 부모님을 설득해야 해. 나의 설득전략은?",
+    evaluationItems: "평가항목: 문제파악능력/문제해결능력/논리력/전달력",
     startTime: 0,
-    endTime: 42
+    guidelines: [
+      "답변 시간은 2-3분을 넘지 않도록 합니다.",
+      "정답이 정해져 있지 않음을 안내하여 자유로운 표현을 독려합니다.",
+      "긍정적인 피드백을 먼저 제시하여 자신감을 북돋아줍니다.",
+      "답변 중 끊지 말고 끝까지 경청합니다.",
+      "비언어적 표현(표정, 제스처 등)도 관찰합니다."
+    ]
   },
   {
-    videoUrl: "/video/daniquestionandanswer.mp4",
-    question: "두 번째 질문: 여러분이라면 어떻게 대답했을까요?",
-    startTime: 20,
-    endTime: 30
+    videoUrl: "https://opct.blob.core.windows.net/alphatest/q2_diet.mp4",
+    question: "2번 문항: 다이어트를 고민하는 친구에게 내가 해줄 수 있는 말은?",
+    evaluationItems: "평가항목: 내용구성력/상호작용능력/전달력",
+    startTime: 0,
+    guidelines: [
+      "답변 시간은 2-3분을 넘지 않도록 합니다.",
+      "정답이 정해져 있지 않음을 안내하여 자유로운 표현을 독려합니다.",
+      "긍정적인 피드백을 먼저 제시하여 자신감을 북돋아줍니다.",
+      "답변 중 끊지 말고 끝까지 경청합니다.",
+      "비언어적 표현(표정, 제스처 등)도 관찰합니다."
+    ]
   },
   {
-    videoUrl: "/video/daniquestionandanswer.mp4",
-    question: "세 번째 질문: 이런 상황에서 어떻게 하는 것이 좋을까요?",
-    startTime: 30,
-    endTime: 40
+    videoUrl: "https://opct.blob.core.windows.net/alphatest/q3_diet.mp4",
+    question: "3번 문항: 1년동안 나에게 가장 고마웠던 사람에게 크리스마스 선물을 한다면? 그 이유도 알려줘!",
+    evaluationItems: "평가항목: 내용구성력/상호작용능력/전달력",
+    startTime: 0,
+    guidelines: [
+      "답변 시간은 2-3분을 넘지 않도록 합니다.",
+      "정답이 정해져 있지 않음을 안내하여 자유로운 표현을 독려합니다.",
+      "긍정적인 피드백을 먼저 제시하여 자신감을 북돋아줍니다.",
+      "답변 중 끊지 말고 끝까지 경청합니다.",
+      "비언어적 표현(표정, 제스처 등)도 관찰합니다."
+    ]
   },
   {
-    videoUrl: "/video/daniquestionandanswer.mp4",
-    question: "네 번째 질문: 다니의 표정과 말투는 어땠나요?",
-    startTime: 40,
-    endTime: 50
+    videoUrl: "https://opct.blob.core.windows.net/alphatest/q4_.mp4",
+    question: "4번 문항: 용돈이 너무 적은 것 같아서, 부모님께 용돈을 올려달라고 해야 해. 어떻게 말해야 성공할 수 있을까?",
+    evaluationItems: "평가항목: 문제파악능력/문제해결능력/논리력/전달력",
+    startTime: 0,
+    guidelines: [
+      "답변 시간은 2-3분을 넘지 않도록 합니다.",
+      "정답이 정해져 있지 않음을 안내하여 자유로운 표현을 독려합니다.",
+      "긍정적인 피드백을 먼저 제시하여 자신감을 북돋아줍니다.",
+      "답변 중 끊지 말고 끝까지 경청합니다.",
+      "비언어적 표현(표정, 제스처 등)도 관찰합니다."
+    ]
   },
   {
-    videoUrl: "/video/daniquestionandanswer.mp4",
-    question: "다섯 번째 질문: 비슷한 경험이 있다면 말해볼까요?",
-    startTime: 50,
-    endTime: 60
-  },
-  {
-    videoUrl: "/video/daniquestionandanswer.mp4",
-    question: "여섯 번째 질문: 이 상황에서 가장 중요한 것은 무엇일까요?",
-    startTime: 60,
-    endTime: 70
-  },
-  {
-    videoUrl: "/video/daniquestionandanswer.mp4",
-    question: "마지막 질문: 앞으로 이런 상황이 생긴다면 어떻게 할 건가요?",
-    startTime: 70,
-    endTime: 80
+    videoUrl: "https://opct.blob.core.windows.net/alphatest/q5_birthday.mp4",
+    question: "5번 문항: 생일파티에 초대받는 너, 미리 선약이 있어 어쩔 수 없이 거절해야하는 상황인데 뭐라고 이야기할거야?",
+    evaluationItems: "평가항목: 내용구성력/상호작용능력/전달력",
+    startTime: 0,
+    guidelines: [
+      "답변 시간은 2-3분을 넘지 않도록 합니다.",
+      "정답이 정해져 있지 않음을 안내하여 자유로운 표현을 독려합니다.",
+      "긍정적인 피드백을 먼저 제시하여 자신감을 북돋아줍니다.",
+      "답변 중 끊지 말고 끝까지 경청합니다.",
+      "비언어적 표현(표정, 제스처 등)도 관찰합니다."
+    ]
   }
 ]; 
